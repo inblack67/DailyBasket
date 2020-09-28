@@ -28,6 +28,12 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenRootTypes {
+  Cart: { // root type
+    _id: string; // ID!
+    amount: number; // Float!
+    createdAt: string; // String!
+    product?: NexusGenRootTypes['Product'] | null; // Product
+  }
   Category: { // root type
     _id: string; // ID!
     createdAt: string; // String!
@@ -72,6 +78,12 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
+  Cart: { // field return type
+    _id: string; // ID!
+    amount: number; // Float!
+    createdAt: string; // String!
+    product: NexusGenRootTypes['Product'] | null; // Product
+  }
   Category: { // field return type
     _id: string; // ID!
     createdAt: string; // String!
@@ -82,7 +94,9 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     addCategory: NexusGenRootTypes['Category']; // Category!
     addProduct: NexusGenRootTypes['Product']; // Product!
+    addToCart: NexusGenRootTypes['Cart']; // Cart!
     deleteCategory: NexusGenRootTypes['Category'] | null; // Category
+    deleteFromCart: NexusGenRootTypes['Cart']; // Cart!
     deleteProduct: NexusGenRootTypes['Product'] | null; // Product
     login: NexusGenRootTypes['User']; // User!
     logout: NexusGenRootTypes['User'] | null; // User
@@ -107,6 +121,7 @@ export interface NexusGenFieldTypes {
     title: string; // String!
   }
   Query: { // field return type
+    cartProducts: NexusGenRootTypes['Cart'][]; // [Cart!]!
     categories: NexusGenRootTypes['Category'][]; // [Category!]!
     category: NexusGenRootTypes['Category']; // Category!
     categoryProducts: NexusGenRootTypes['Product'][]; // [Product!]!
@@ -137,8 +152,15 @@ export interface NexusGenArgTypes {
       price?: number | null; // Float
       title?: string | null; // String
     }
+    addToCart: { // args
+      amount?: number | null; // Float
+      product?: string | null; // ID
+    }
     deleteCategory: { // args
       id?: string | null; // ID
+    }
+    deleteFromCart: { // args
+      product?: string | null; // ID
     }
     deleteProduct: { // args
       id?: string | null; // ID
@@ -182,7 +204,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Category" | "Mutation" | "Order" | "Product" | "Query" | "User";
+export type NexusGenObjectNames = "Cart" | "Category" | "Mutation" | "Order" | "Product" | "Query" | "User";
 
 export type NexusGenInputNames = never;
 

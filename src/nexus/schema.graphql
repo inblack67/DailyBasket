@@ -2,6 +2,13 @@
 ### Do not make changes to this file directly
 
 
+type Cart {
+  _id: ID!
+  amount: Float!
+  createdAt: String!
+  product: Product
+}
+
 type Category {
   _id: ID!
   createdAt: String!
@@ -17,8 +24,14 @@ type Mutation {
   """Add Product"""
   addProduct(category: ID, description: String, discount: Float, price: Float, title: String): Product!
 
+  """Add To Cart"""
+  addToCart(amount: Float, product: ID): Cart!
+
   """Delete Category"""
   deleteCategory(id: ID): Category
+
+  """Delete From Cart"""
+  deleteFromCart(product: ID): Cart!
 
   """Delete Product"""
   deleteProduct(id: ID): Product
@@ -58,6 +71,9 @@ type Product {
 }
 
 type Query {
+  """Get Products In Cart"""
+  cartProducts: [Cart!]!
+
   """Get All Categories"""
   categories: [Category!]!
 

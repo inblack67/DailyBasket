@@ -6,8 +6,10 @@ import asyncHandler from '../../middlewares/asyncHandler';
 import { Category } from './Category';
 import { Product } from './Product';
 import { Order } from './Order';
+import { Cart } from './Cart';
 import CategoryModel from '../../models/Category';
 import ProductModel from '../../models/Product';
+import CartModel from '../../models/Cart';
 import OrderModel from '../../models/Order';
 
 export const Query = queryType({
@@ -37,6 +39,22 @@ export const Query = queryType({
                 async (_, { id }) => {
                     const product = await ProductModel.findById(id).populate('category');
                     return product;
+                }
+            )
+        })
+
+        t.list.field('cartProducts', {
+            type: Cart,
+            description: 'Get Products In Cart',
+            resolve: asyncHandler(
+                async (_, args, ctx) => {
+                    const isAuth = await isProtected(ctx);
+
+                    if (!isAuth) {
+                        throw new ErrorResponse('Not Auth!', 403);
+                    }
+                    const products = await CartModel.find({ user: ctx.req.user._id }).populate('product');
+                    return products;
                 }
             )
         })

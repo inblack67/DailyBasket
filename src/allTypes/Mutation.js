@@ -8,14 +8,60 @@ import { isProtected } from '../../src/isAuthenticated'
 import { Category } from './Category';
 import { Product } from './Product';
 import { Order } from './Order';
+import { Cart } from './Cart';
 import CategoryModel from '../../models/Category';
 import ProductModel from '../../models/Product';
 import OrderModel from '../../models/Order';
+import CartModel from '../../models/Cart';
 
 export const Mutation = mutationType({
     definition(t) {
 
         t.typeName = 'Mutations';
+
+        t.field('addToCart', {
+            type: Cart,
+            description: 'Add To Cart',
+            args: { amount: floatArg(), product: idArg() },
+            resolve: asyncHandler(
+                async (_, { amount, product }, ctx) => {
+
+                    const isAuth = await isProtected(ctx);
+
+                    if (!isAuth) {
+                        throw new ErrorResponse('Not Auth!', 403);
+                    }
+
+                    const addedItem = await CartModel.create({ amount, product, user: ctx.req.user._id });
+                    const newItem = await CartModel.findById(addedItem._id).populate('product');
+                    return newItem;
+                }
+            )
+        })
+
+        t.field('deleteFromCart', {
+            type: Cart,
+            description: 'Delete From Cart',
+            args: { product: idArg() },
+            resolve: asyncHandler(
+                async (_, { product }, ctx) => {
+
+                    const isAuth = await isProtected(ctx);
+
+                    if (!isAuth) {
+                        throw new ErrorResponse('Not Auth!', 403);
+                    }
+
+                    const newItem = await CartModel.findByIdAndDelete(product).populate('product');
+
+                    if(!newItem){
+                        throw new ErrorResponse('Resource Not Found!', 404);
+                    }
+
+                    return newItem;
+                }
+            )
+        })
 
         t.field('addCategory', {
             type: Category,
@@ -29,6 +75,7 @@ export const Mutation = mutationType({
                 }
             )
         })
+
         t.field('addProduct', {
             type: Product,
             description: 'Add Product',
