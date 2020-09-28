@@ -3,6 +3,8 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import { useMutation, gql } from '@apollo/client'
 import Preloader from './Preloader'
 import Router from 'next/router'
+import PropTypes from 'prop-types'
+
 
 const paymentMutation = gql`
 mutation ($amount: Float!, $id: ID!) {
@@ -10,7 +12,7 @@ mutation ($amount: Float!, $id: ID!) {
 }
 `;
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ amount }) => {
 
     const stripe = useStripe();
     const elements = useElements();
@@ -30,7 +32,7 @@ const CheckoutForm = () => {
                 payIt({
                     variables: {
                         id,
-                        amount: 1197 // in paise
+                        amount: amount * 100 // in paise
                     }
                 }).catch(err => console.error(err)).then((data) => {
                     console.log(data);
@@ -62,6 +64,10 @@ const CheckoutForm = () => {
             </form>
         </div>
     )
+}
+
+CheckoutForm.propTypes = {
+    amount: PropTypes.number.isRequired,
 }
 
 export default CheckoutForm

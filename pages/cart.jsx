@@ -2,6 +2,7 @@ import React from 'react'
 import { gql, useQuery } from '@apollo/client'
 import Preloader from '../components/Preloader'
 import Link from 'next/link'
+import Gateway from '../components/Gateway'
 
 const MyQuery = gql`
 {
@@ -48,12 +49,8 @@ const cart = () => {
                         </span>
                     </span>
                 </div>
-                <div className="card-action">
-                    <Link href='/pay'>
-                        <a>Proceed To Pay</a>
-                    </Link>
-                </div>
             </div>
+            <Gateway amount={amount} />
         </div>
     )
 }
