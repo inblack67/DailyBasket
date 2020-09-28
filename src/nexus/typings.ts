@@ -100,6 +100,7 @@ export interface NexusGenFieldTypes {
     deleteProduct: NexusGenRootTypes['Product'] | null; // Product
     login: NexusGenRootTypes['User']; // User!
     logout: NexusGenRootTypes['User'] | null; // User
+    pay: string; // String!
     register: NexusGenRootTypes['User']; // User!
     updateCategory: NexusGenRootTypes['Category'] | null; // Category
     updateProduct: NexusGenRootTypes['Product'] | null; // Product
@@ -168,6 +169,10 @@ export interface NexusGenArgTypes {
     login: { // args
       email?: string | null; // String
       password?: string | null; // String
+    }
+    pay: { // args
+      amount?: number | null; // Float
+      id?: string | null; // ID
     }
     register: { // args
       email?: string | null; // String

@@ -13,12 +13,40 @@ import CategoryModel from '../../models/Category';
 import ProductModel from '../../models/Product';
 import OrderModel from '../../models/Order';
 import CartModel from '../../models/Cart';
+import Stripes from 'stripe';
 
 export const Mutation = mutationType({
     definition(t) {
 
         t.typeName = 'Mutations';
 
+        t.field('pay', {
+            type: 'String',
+            description: 'Pay',
+            args: { amount: floatArg(), id: idArg() },
+            resolve: asyncHandler(
+                async (_, { amount, id }, ctx) => {
+
+                    const isAuth = await isProtected(ctx);
+
+                    if (!isAuth) {
+                        throw new ErrorResponse('Not Auth!', 403);
+                    }
+
+                    const stripe = new Stripes(process.env.STRIPE_SECRET_KEY);
+
+                    await stripe.paymentIntents.create({
+                        amount,
+                        currency: 'INR',
+                        description: 'Product Payment',
+                        payment_method: id,
+                        confirm: true,
+                    })
+
+                    return 'Payment Successful';
+                }
+            )
+        })
         t.field('addToCart', {
             type: Cart,
             description: 'Add To Cart',
@@ -54,7 +82,7 @@ export const Mutation = mutationType({
 
                     const newItem = await CartModel.findByIdAndDelete(product).populate('product');
 
-                    if(!newItem){
+                    if (!newItem) {
                         throw new ErrorResponse('Resource Not Found!', 404);
                     }
 

@@ -42,6 +42,9 @@ type Mutation {
   """Logout"""
   logout: User
 
+  """Pay"""
+  pay(amount: Float, id: ID): String!
+
   """Register"""
   register(email: String, name: String, password: String): User!
 
