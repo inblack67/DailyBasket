@@ -12,6 +12,8 @@ query ($id: ID!){
     products{
         title
         description
+        price
+        discount
         _id
     }
   }

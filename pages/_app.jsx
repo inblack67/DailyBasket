@@ -7,11 +7,13 @@ function MyApp({ Component, pageProps }) {
 
   const apolloClient = useApollo(pageProps.initialApolloState)
 
-  return <Layout>
+  return (
     <ApolloProvider client={apolloClient}>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ApolloProvider>
-  </Layout>
+  )
 }
 
 export default MyApp
