@@ -10,4 +10,10 @@ mutation{
       name
     }
   }
+
+  mutation{
+    addCategory(title:"Grocery", description:"lorem"){
+      title
+    }
+  }
 `

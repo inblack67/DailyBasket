@@ -1,22 +1,38 @@
-import { server } from '../src/server';
+import { gql, useQuery } from '@apollo/client';
+import Preloader from '../components/Preloader';
+import CategoryItem from '../components/CategoryItem';
 
-const About = () => {
+const MyQuery = gql`
+{
+    categories{
+        title,
+        description
+        _id,
+        products{
+            title
+        }
+    }
+}
+`;
+
+const Home = () => {
+
+    const { loading, data } = useQuery(MyQuery);
+
+    if (loading) {
+        return <Preloader />
+    }
+
+    const { categories } = data;
+
     return (
         <div className='container'>
-            <h3>NextOverlow</h3>
-            <p className="flow-text">
-                Nextjs | GraphQL | Apollo | MongoDB | Materialize
-          </p>
-            <a href={`${server}/api/graphql`} className="btn purple pulse">
-                Go Play
-            </a>
-            <p className="helper-text">Frontend it boring. Might make it some other time.</p>
-            <hr />
-            <strong>
-                NextOverlow &copy; 2020
-          </strong>
+            <p className="flow-text center">Categories</p>
+            <div className="row">
+                {categories.map(cat => <CategoryItem key={cat._id} category={cat} />)}
+            </div>
         </div>
     )
 }
 
-export default About
+export default Home
