@@ -8,7 +8,7 @@ const Navbar = () => {
                 <div className="container">
                     <Link href='/'>
                         <a className="brand-logo">
-                            NextOverflow
+                            DailyBasket
                         </a>
                     </Link>
                 </div>
