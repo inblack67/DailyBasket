@@ -40,9 +40,9 @@ const ProductItem = ({ product: { title, description, price, discount, _id } }) 
                 amount: price,
                 product: _id
             }
-        }).catch(err => console.error(err)).then(() => {
+        }).then(() => {
             M.toast({ html: 'Added To Cart' })
-        })
+        }).catch(err => console.error(err))
     }
 
     if (loading) {

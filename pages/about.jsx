@@ -6,7 +6,7 @@ const About = () => {
             <h4>DailyBasket</h4>
             <div>
                 <hr />
-                <h5>E-Commerce Web App In Next.js And GraphQL</h5>
+                <h5>E-Commerce Web App With Next.js And GraphQL</h5>
                 <p>
                     Nextjs | GraphQL | Apollo | MongoDB | Materialize
           </p>
@@ -15,7 +15,7 @@ const About = () => {
             </a> : null}
                 <p>
                     <strong>
-                        Next<span className="red-text">Overlow</span> &copy; 2020
+                        Daily<span className="red-text">Basket</span> &copy; 2020
                 </strong>
                 </p>
                 <a href="https://github.com/inblack67/Heeko-Assignment" rel='noopener noreferrer' target='_blank'>

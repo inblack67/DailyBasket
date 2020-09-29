@@ -8,7 +8,9 @@ import PropTypes from 'prop-types'
 
 const paymentMutation = gql`
 mutation ($amount: Float!, $id: ID!) {
-  pay(amount: $amount, id: $id)
+  pay(amount: $amount, id: $id){
+      amount
+  }
 }
 `;
 
@@ -34,11 +36,10 @@ const CheckoutForm = ({ amount }) => {
                         id,
                         amount: amount * 100 // in paise
                     }
-                }).catch(err => console.error(err)).then((data) => {
-                    console.log(data);
+                }).then((data) => {
                     M.toast({ html: 'Payment Done' });
                     Router.push('/thanks');
-                })
+                }).catch(err => console.error(err))
             }
         } catch (err) {
             console.error(err)

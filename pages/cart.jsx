@@ -64,9 +64,9 @@ const cart = () => {
                                 variables: {
                                     product: pro._id
                                 }
-                            }).catch(err => console.error(err)).then(() => {
+                            }).then(() => {
                                 M.toast({ html: 'Item Deleted' })
-                            })
+                            }).catch(err => console.error(err))
                         }}>
                             <i className="material-icons">delete</i>
                         </a>

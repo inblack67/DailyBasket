@@ -74,7 +74,6 @@ export const Query = queryType({
                         throw new ErrorResponse('Not Authorized', 403);
                     }
                     const products = await CartModel.find({ user: ctx.req.user._id }).populate('product');
-                    console.log(products)
                     return products;
                 }
             )
