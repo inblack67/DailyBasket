@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
-import { onError } from "@apollo/client/link/error";
+import { onError } from "@apollo/client/link/error"
+import Router from 'next/router'
 
 let apolloClient;
 
@@ -24,6 +25,10 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
             console.log(
                 `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
             )
+            if (message === 'Not Authorized') {
+                M.toast({ html: 'You must login first!' })
+                Router.replace('/login');
+            }
         }
         );
     }

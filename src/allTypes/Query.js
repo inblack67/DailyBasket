@@ -15,6 +15,26 @@ import OrderModel from '../../models/Order';
 export const Query = queryType({
     definition(t) {
 
+        t.field('yourOrders', {
+            type: Order,
+            nullable: true,
+            description: 'Your Placed Orders',
+            resolve: asyncHandler(
+                async (_, args, ctx) => {
+
+                    const isAuth = await isProtected(ctx);
+
+                    if (!isAuth) {
+                        throw new ErrorResponse('Not Authorized', 403);
+                    }
+
+                    const orders = await OrderModel.find({ user: ctx.req.user._id }).populate('product');
+
+                    return orders;
+                }
+            )
+        })
+
         t.list.field('categoryProducts', {
             type: Product,
             description: 'Get All Products Of A Category',
@@ -51,7 +71,7 @@ export const Query = queryType({
                     const isAuth = await isProtected(ctx);
 
                     if (!isAuth) {
-                        throw new ErrorResponse('Not Auth!', 403);
+                        throw new ErrorResponse('Not Authorized', 403);
                     }
                     const products = await CartModel.find({ user: ctx.req.user._id }).populate('product');
                     console.log(products)
@@ -103,7 +123,7 @@ export const Query = queryType({
                 async (parent, args, ctx) => {
                     const isAuthenticated = await isProtected(ctx);
                     if (!isAuthenticated) {
-                        throw new ErrorResponse('Not Auth!', 401);
+                        throw new ErrorResponse('Not Authorized', 401);
                     }
                     return ctx.req.user;
                 }

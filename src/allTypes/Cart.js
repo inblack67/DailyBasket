@@ -11,6 +11,10 @@ export const Cart = objectType({
             type: Product,
             nullable: true
         });
+        t.field('user', {
+            type: User,
+            nullable: true
+        });
         t.string('createdAt');
     }
 })

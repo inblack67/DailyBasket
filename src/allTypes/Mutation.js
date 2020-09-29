@@ -21,16 +21,16 @@ export const Mutation = mutationType({
         t.typeName = 'Mutations';
 
         t.field('pay', {
-            type: 'String',
+            type: Order,
             description: 'Pay',
-            args: { amount: floatArg(), id: idArg() },
+            args: { amount: floatArg(), id: idArg(), productId: idArg() },
             resolve: asyncHandler(
-                async (_, { amount, id }, ctx) => {
+                async (_, { amount, id, productId }, ctx) => {
 
                     const isAuth = await isProtected(ctx);
 
                     if (!isAuth) {
-                        throw new ErrorResponse('Not Auth!', 403);
+                        throw new ErrorResponse('Not Authorized', 403);
                     }
 
                     const stripe = new Stripes(process.env.STRIPE_SECRET_KEY);
@@ -43,7 +43,11 @@ export const Mutation = mutationType({
                         confirm: true,
                     })
 
-                    return 'Payment Successful';
+                    const newOrder = await OrderModel.create({ amount, productId, user: ctx.req.user._id });
+
+                    const order = await OrderModel.findById(newOrder._id).populate('product');
+
+                    return order;
                 }
             )
         })
@@ -57,7 +61,7 @@ export const Mutation = mutationType({
                     const isAuth = await isProtected(ctx);
 
                     if (!isAuth) {
-                        throw new ErrorResponse('Not Auth!', 403);
+                        throw new ErrorResponse('Not Authorized', 403);
                     }
 
                     const addedItem = await CartModel.create({ amount, product, user: ctx.req.user._id });
@@ -77,7 +81,7 @@ export const Mutation = mutationType({
                     const isAuth = await isProtected(ctx);
 
                     if (!isAuth) {
-                        throw new ErrorResponse('Not Auth!', 403);
+                        throw new ErrorResponse('Not Authorized', 403);
                     }
 
                     const newItem = await CartModel.findByIdAndDelete(product).populate('product');
@@ -233,7 +237,7 @@ export const Mutation = mutationType({
                     const isAuth = await isProtected(ctx);
 
                     if (isAuth) {
-                        throw new ErrorResponse('Not Auth!', 403);
+                        throw new ErrorResponse('Already Authenticated', 403);
                     }
 
                     const user = await UserModel.findOne({ email }).select('+password');
@@ -303,7 +307,7 @@ export const Mutation = mutationType({
                     const isAuth = await isProtected(ctx);
 
                     if (isAuth) {
-                        throw new ErrorResponse('Not Auth!', 403);
+                        throw new ErrorResponse('Not Authorized', 403);
                     }
 
                     const user = await UserModel.create({ name, email, password });

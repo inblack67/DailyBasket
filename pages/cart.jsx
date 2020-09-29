@@ -24,24 +24,23 @@ const cart = () => {
         return <Preloader />
     }
 
-    const { cartProducts } = data;
-
-    const amount = cartProducts.reduce((prev, curr) => curr.amount + prev, 0)
+    const amount = data.cartProducts.reduce((prev, curr) => curr.amount + prev, 0)
 
     return (
         <div className='container'>
-            <p className="flow-text center">Your Cart</p>
+            <p className="flow-text center">Your <span className="red-text">Cart</span></p>
             <ul className="collection">
-                {cartProducts.map(pro => <li key={pro._id} className='collection-item'>
-                    <span>
+                {data && data.cartProducts.map(pro => <li key={pro._id} className='collection-item'>
+                    <span className='blue-text'>
                         {pro.product.title}
                     </span>
-                    <span className="secondary-content">
-                        {pro.amount}
+                    <span className="secondary-content red-text">
+                        {pro.amount} Rupees
                     </span>
                 </li>)}
             </ul>
-            <div className='card black white-text'>
+            <Gateway amount={amount} />
+            <div className='card black white-text center'>
                 <div className="card-content">
                     <span className="card-title">
                         Total Amount: <span className="red-text">
@@ -50,7 +49,6 @@ const cart = () => {
                     </span>
                 </div>
             </div>
-            <Gateway amount={amount} />
         </div>
     )
 }

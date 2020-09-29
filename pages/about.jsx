@@ -10,7 +10,7 @@ const About = () => {
                 <p>
                     Nextjs | GraphQL | Apollo | MongoDB | Materialize
           </p>
-                {process.env.NODE_ENV !== 'production' ? <a href={`${server}/api/graphql`} className="btn red">
+                {process.env.NODE_ENV !== 'production' ? <a target='_blank' rel='noopener noreferrer' href={`${server}/api/graphql`} className="btn red">
                     Go Play
             </a> : null}
                 <p>
