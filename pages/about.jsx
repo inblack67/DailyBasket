@@ -2,15 +2,15 @@ import { server } from '../src/server';
 
 const About = () => {
     return (
-        <div className='container'>
-            <h4>DailyBasket</h4>
+        <div className='container center'>
+            <h4>Daily<span className="red-text">Basket</span></h4>
             <div>
                 <hr />
                 <h5>E-Commerce Web App With Next.js And GraphQL</h5>
                 <p>
                     Nextjs | GraphQL | Apollo | MongoDB | Stripe Payments | Materialize
           </p>
-                {process.env.NODE_ENV !== 'production' ? <a target='_blank' rel='noopener noreferrer' href={`${server}/api/graphql`} className="btn red">
+                {process.env.NODE_ENV !== 'production' ? <a target='_blank' rel='noopener noreferrer' href={`${server}/api/graphql`} className="pulse btn red">
                     Go Play
             </a> : null}
                 <p>
