@@ -7,9 +7,6 @@ export const Order = objectType({
     definition(t) {
         t.id('_id');
         t.float('amount');
-        t.field('product', {
-            type: Product
-        });
         t.field('user', {
             type: User
         });

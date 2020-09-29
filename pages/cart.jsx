@@ -1,5 +1,5 @@
 import React from 'react'
-import { gql, useQuery } from '@apollo/client'
+import { gql, useQuery, useMutation } from '@apollo/client'
 import Preloader from '../components/Preloader'
 import Link from 'next/link'
 import Gateway from '../components/Gateway'
@@ -16,15 +16,36 @@ const MyQuery = gql`
 }
 `;
 
+const deleteProductMutation = gql`
+mutation ($product: ID!){
+    deleteFromCart (product: $product){
+        product{
+            title
+        }
+    }
+}
+`;
+
 const cart = () => {
 
     const { loading, data } = useQuery(MyQuery);
+    const [deleteProduct, mutationRes] = useMutation(deleteProductMutation, {
+        refetchQueries: [
+            {
+                query: MyQuery
+            }
+        ]
+    });
 
     if (loading) {
         return <Preloader />
     }
 
-    const amount = data.cartProducts.reduce((prev, curr) => curr.amount + prev, 0)
+    if (mutationRes.loading) {
+        return <Preloader />
+    }
+
+    const amount = data ? data.cartProducts.reduce((prev, curr) => curr.amount + prev, 0) : 0.00
 
     return (
         <div className='container'>
@@ -34,9 +55,22 @@ const cart = () => {
                     <span className='blue-text'>
                         {pro.product.title}
                     </span>
-                    <span className="secondary-content red-text">
-                        {pro.amount} Rupees
-                    </span>
+                    <div className="secondary-content">
+                        <span className="green-text">
+                            {pro.amount} Rupees
+                        </span>
+                        <a href='#!' className="secondary-content red-text" onClick={e => {
+                            deleteProduct({
+                                variables: {
+                                    product: pro._id
+                                }
+                            }).catch(err => console.error(err)).then(() => {
+                                M.toast({ html: 'Item Deleted' })
+                            })
+                        }}>
+                            <i className="material-icons">delete</i>
+                        </a>
+                    </div>
                 </li>)}
             </ul>
             <Gateway amount={amount} />

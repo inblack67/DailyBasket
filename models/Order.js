@@ -5,11 +5,6 @@ const OrderSchema = new Schema({
         type: Number,
         required: [true, 'Order amount is required'],
     },
-    product: {
-        type: Schema.ObjectId,
-        ref: 'Product',
-        required: [true, 'Which product\'s order it is?']
-    },
     user: {
         type: Schema.ObjectId,
         ref: 'User',

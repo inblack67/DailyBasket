@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Navbar from './Navbar';
+import Cart from './Cart';
 
 const Layout = ({ children }) => {
 
@@ -29,6 +30,7 @@ const Layout = ({ children }) => {
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" />
             </Head>
             <Navbar />
+            <Cart />
             { children}
         </div>
     )

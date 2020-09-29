@@ -33,6 +33,7 @@ export interface NexusGenRootTypes {
     amount: number; // Float!
     createdAt: string; // String!
     product?: NexusGenRootTypes['Product'] | null; // Product
+    user?: NexusGenRootTypes['User'] | null; // User
   }
   Category: { // root type
     _id: string; // ID!
@@ -46,7 +47,6 @@ export interface NexusGenRootTypes {
     _id: string; // ID!
     amount: number; // Float!
     createdAt: string; // String!
-    product: NexusGenRootTypes['Product']; // Product!
     user: NexusGenRootTypes['User']; // User!
   }
   Product: { // root type
@@ -83,6 +83,7 @@ export interface NexusGenFieldTypes {
     amount: number; // Float!
     createdAt: string; // String!
     product: NexusGenRootTypes['Product'] | null; // Product
+    user: NexusGenRootTypes['User'] | null; // User
   }
   Category: { // field return type
     _id: string; // ID!
@@ -109,7 +110,6 @@ export interface NexusGenFieldTypes {
     _id: string; // ID!
     amount: number; // Float!
     createdAt: string; // String!
-    product: NexusGenRootTypes['Product']; // Product!
     user: NexusGenRootTypes['User']; // User!
   }
   Product: { // field return type
@@ -174,7 +174,6 @@ export interface NexusGenArgTypes {
     pay: { // args
       amount?: number | null; // Float
       id?: string | null; // ID
-      productId?: string | null; // ID
     }
     register: { // args
       email?: string | null; // String

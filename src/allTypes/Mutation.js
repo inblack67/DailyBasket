@@ -23,9 +23,9 @@ export const Mutation = mutationType({
         t.field('pay', {
             type: Order,
             description: 'Pay',
-            args: { amount: floatArg(), id: idArg(), productId: idArg() },
+            args: { amount: floatArg(), id: idArg() },
             resolve: asyncHandler(
-                async (_, { amount, id, productId }, ctx) => {
+                async (_, { amount, id }, ctx) => {
 
                     const isAuth = await isProtected(ctx);
 
@@ -43,7 +43,7 @@ export const Mutation = mutationType({
                         confirm: true,
                     })
 
-                    const newOrder = await OrderModel.create({ amount, productId, user: ctx.req.user._id });
+                    const newOrder = await OrderModel.create({ amount, user: ctx.req.user._id });
 
                     const order = await OrderModel.findById(newOrder._id).populate('product');
 

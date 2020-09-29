@@ -1,7 +1,53 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { gql, useMutation } from '@apollo/client'
+import Preloader from './Preloader'
 
-const ProductItem = ({ product: { title, description, price, discount } }) => {
+const addProductMutation = gql`
+mutation ($amount: Float!, $product: ID!){
+  addToCart(amount:$amount, product:$product){
+    amount,
+    product{
+      title
+    }
+  }
+}
+`;
+
+const CartQuery = gql`
+{
+  cartProducts{
+    amount
+    _id
+    product{
+        title
+    }
+  }
+}
+`;
+
+const ProductItem = ({ product: { title, description, price, discount, _id } }) => {
+
+    const [addProduct, { loading, data }] = useMutation(addProductMutation, {
+        refetchQueries: [{
+            query: CartQuery
+        }]
+    });
+
+    const onAdd = e => {
+        addProduct({
+            variables: {
+                amount: price,
+                product: _id
+            }
+        }).catch(err => console.error(err)).then(() => {
+            M.toast({ html: 'Added To Cart' })
+        })
+    }
+
+    if (loading) {
+        return <Preloader />
+    }
 
     return (
         <div className='col s12 m6 l6'>
@@ -18,8 +64,8 @@ const ProductItem = ({ product: { title, description, price, discount } }) => {
                     <a href="#!">
                         {price} Rupees
                     </a>
-                    <a href="#!" className='secondary-content'>
-                        {discount} % Off
+                    <a href="#!" className='secondary-content' onClick={onAdd}>
+                        Add To Cart
                     </a>
                 </div>
             </div>
