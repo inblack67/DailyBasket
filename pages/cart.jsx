@@ -1,4 +1,4 @@
-import React from 'react'
+import { Fragment } from 'react'
 import { gql, useQuery, useMutation } from '@apollo/client'
 import Preloader from '../components/Preloader'
 import Link from 'next/link'
@@ -57,7 +57,7 @@ const cart = () => {
                     </span>
                     <div className="secondary-content">
                         <span className="green-text">
-                            {pro.amount} Rupees
+                            {pro.amount} Rs.
                         </span>
                         <a href='#!' className="secondary-content red-text" onClick={e => {
                             deleteProduct({
@@ -78,7 +78,7 @@ const cart = () => {
                 <div className="card-content">
                     <span className="card-title">
                         Total Amount: <span className="red-text">
-                            {amount} Rupees
+                            {amount} Rs.
                         </span>
                     </span>
                 </div>

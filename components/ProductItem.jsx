@@ -62,12 +62,12 @@ const ProductItem = ({ product: { title, description, price, discount, _id } }) 
                 </div>
                 <div className="card-action">
                     <a href="#!">
-                        {price} Rupees
+                        {price} Rs.
                     </a>
                     <a href="#!">
-                        {discount} Rupees Off
+                        {discount} Rs. Off
                     </a>
-                    <a href="#!" className='secondary-content' onClick={onAdd}>
+                    <a href="#!" onClick={onAdd}>
                         Add To Cart
                     </a>
                 </div>
