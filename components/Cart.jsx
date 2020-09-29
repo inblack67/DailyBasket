@@ -8,7 +8,7 @@ const Cart = () => {
                 <a className="btn-floating btn-large red">
                     <i className="material-icons">
                         shopping_cart
-                </i>
+                    </i>
                 </a>
             </Link>
         </div>

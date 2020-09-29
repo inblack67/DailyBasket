@@ -37,7 +37,7 @@ const ProductItem = ({ product: { title, description, price, discount, _id } }) 
     const onAdd = e => {
         addProduct({
             variables: {
-                amount: price,
+                amount: price - discount,
                 product: _id
             }
         }).then(() => {
@@ -63,6 +63,9 @@ const ProductItem = ({ product: { title, description, price, discount, _id } }) 
                 <div className="card-action">
                     <a href="#!">
                         {price} Rupees
+                    </a>
+                    <a href="#!">
+                        {discount} Rupees Off
                     </a>
                     <a href="#!" className='secondary-content' onClick={onAdd}>
                         Add To Cart

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useMutation, gql } from '@apollo/client';
 import Preloader from './Preloader';
 import Router from 'next/router';
+import { Fragment } from 'react';
 
 const logoutMutation = gql`
 mutation{
@@ -30,45 +31,52 @@ const Navbar = () => {
     }
 
     return (
-        <nav className='black'>
-            <div className="nav-wrapper">
-                <div className="container">
-                    <Link href='/'>
-                        <a className="brand-logo">
-                            Daily<span className="red-text">Basket</span>
-                        </a>
-                    </Link>
-                    <ul className="right">
-                        <li>
-                            <a href='#!' onClick={onLogout}>
-                                Logout
+        <Fragment>
+            <nav className='black'>
+                <div className="nav-wrapper">
+                    <div className="container">
+                        <Link href='/'>
+                            <a className="brand-logo hide-on-med-and-down">
+                                Daily<span className="red-text">Basket</span>
+                            </a>
+                        </Link>
+                        <Link href='/'>
+                            <a className="hide-on-large-only">
+                                Daily<span className="red-text">Basket</span>
+                            </a>
+                        </Link>
+                        <ul className="right">
+                            <li>
+                                <a href='#!' onClick={onLogout}>
+                                    Logout
                            </a>
-                        </li>
-                        <li>
-                            <Link href='/login'>
-                                <a>
-                                    Login
+                            </li>
+                            <li>
+                                <Link href='/login'>
+                                    <a>
+                                        Login
                                 </a>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href='/register'>
-                                <a>
-                                    Register
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href='/register'>
+                                    <a>
+                                        Register
                                 </a>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href='/about'>
-                                <a>
-                                    About
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href='/about'>
+                                    <a>
+                                        About
                                 </a>
-                            </Link>
-                        </li>
-                    </ul>
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </Fragment>
     )
 }
 
