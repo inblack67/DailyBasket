@@ -20,6 +20,7 @@
     "mongoose": "^5.10.3",
     "next": "9.5.2",
     "next-connect": "^0.8.1",
+    "next-pwa": "^3.1.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-hook-form": "^6.8.6",

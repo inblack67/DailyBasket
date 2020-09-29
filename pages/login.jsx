@@ -16,12 +16,7 @@ const Login = () => {
 
     const [submitting, setSubmitting] = useState(false);
 
-    const { register, handleSubmit, errors } = useForm({
-        defaultValues: {
-            email: 'aman@gmail.com',
-            password: '12345678'
-        }
-    });
+    const { register, handleSubmit, errors } = useForm();
 
     const [login, { loading, data }] = useMutation(loginMutation);
 
@@ -57,14 +52,14 @@ const Login = () => {
                         required: 'Required!'
                     })} />
                     <label htmlFor="email"></label>
-                    {errors.email ? <span className="helper-text red-text">{errors.email.message}</span> : <span className="helper-text white-text">Email</span>}
+                    {errors.email ? <span className="helper-text red-text">{errors.email.message}</span> : <span className="helper-text ">Email</span>}
                 </div>
                 <div className="input-field">
                     <input type="password" name='password' ref={register({
                         required: 'Required!'
                     })} />
                     <label htmlFor="password"></label>
-                    {errors.password ? <span className="helper-text red-text">{errors.password.message}</span> : <span className="helper-text white-text">Password</span>}
+                    {errors.password ? <span className="helper-text red-text">{errors.password.message}</span> : <span className="helper-text ">Password</span>}
                 </div>
                 <div className="input-field">
                     <button type="submit" className='btn red' disabled={submitting} >

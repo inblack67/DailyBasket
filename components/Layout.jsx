@@ -10,13 +10,13 @@ const Layout = ({ children }) => {
                 <meta charSet='utf-8' />
                 <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
                 <meta name='viewport' content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no' />
-                <meta name='description' content='E-Commernce Web App With Next.js And GraphQL' />
-                <meta name='keywords' content='Next.js, GraphQL, JWT, CRUD, JavaScript, React.js, MongoDB, DailyBasket, Full-Stack' />
+                <meta name='description' content='Full Stack E-Commernce Web App With Next.js And GraphQL' />
+                <meta name='keywords' content='Next.js, GraphQL, Apollo, JWT, JavaScript, React.js, MongoDB, DailyBasket, Full-Stack, Stripe Payments' />
                 <title>DailyBasket</title>
                 <link rel="manifest" href="/manifest.json" />
-                <link href='./icons/js.png' rel='icon' type='image/png' sizes='16x16' />
-                <link href='./icons/js.png' rel='icon' type='image/png' sizes='32x32' />
-                <link rel="apple-touch-icon" href="/apple-icon.png"></link>
+                <link href='./icons/mac.png' rel='icon' type='image/png' sizes='16x16' />
+                <link href='./icons/mac.png' rel='icon' type='image/png' sizes='32x32' />
+                <link rel="apple-touch-icon" href="./icons/mac.png"></link>
                 <meta name="theme-color" content="#317EFB" />
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />

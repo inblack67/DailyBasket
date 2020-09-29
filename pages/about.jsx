@@ -8,7 +8,7 @@ const About = () => {
                 <hr />
                 <h5>E-Commerce Web App With Next.js And GraphQL</h5>
                 <p>
-                    Nextjs | GraphQL | Apollo | MongoDB | Materialize
+                    Nextjs | GraphQL | Apollo | MongoDB | Stripe Payments | Materialize
           </p>
                 {process.env.NODE_ENV !== 'production' ? <a target='_blank' rel='noopener noreferrer' href={`${server}/api/graphql`} className="btn red">
                     Go Play

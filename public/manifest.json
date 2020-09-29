@@ -1,1 +1,26 @@
-{}
+{
+    "short_name": "DBasket",
+    "name": "DailyBasket",
+    "icons": [
+        {
+            "src": "./icons/mac.svg",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "./icons/mac.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "./icons/mac.svg",
+            "sizes": "196x196",
+            "type": "image/x-icon",
+            "purpose": "any maskable"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff"
+}

@@ -16,13 +16,7 @@ const Register = () => {
 
     const [submitting, setSubmitting] = useState(false);
 
-    const { register, handleSubmit, errors } = useForm({
-        defaultValues: {
-            name: 'aman',
-            email: 'aman@gmail.com',
-            password: 'Aman123@'
-        }
-    });
+    const { register, handleSubmit, errors } = useForm();
 
     const [registerUser, { data, loading }] = useMutation(registerMutation);
 
@@ -57,14 +51,14 @@ const Register = () => {
                         required: 'Required!'
                     })} />
                     <label htmlFor="name"></label>
-                    {errors.name ? <span className="helper-text red-text">{errors.name.message}</span> : <span className="helper-text white-text">Name</span>}
+                    {errors.name ? <span className="helper-text red-text">{errors.name.message}</span> : <span className="helper-text ">Name</span>}
                 </div>
                 <div className="input-field">
                     <input type="email" name='email' ref={register({
                         required: 'Required!'
                     })} />
                     <label htmlFor="email"></label>
-                    {errors.email ? <span className="helper-text red-text">{errors.email.message}</span> : <span className="helper-text white-text">Email</span>}
+                    {errors.email ? <span className="helper-text red-text">{errors.email.message}</span> : <span className="helper-text ">Email</span>}
                 </div>
                 <div className="input-field">
                     <input type="password" name='password' ref={register({
@@ -86,7 +80,7 @@ const Register = () => {
                         },
                     })} />
                     <label htmlFor="password"></label>
-                    {errors.password ? <span className="helper-text red-text">{errors.password.message}</span> : <span className="helper-text white-text">Password</span>}
+                    {errors.password ? <span className="helper-text red-text">{errors.password.message}</span> : <span className="helper-text ">Password</span>}
                 </div>
                 <div className="input-field">
                     <button type="submit" className='btn red' disabled={submitting} >
