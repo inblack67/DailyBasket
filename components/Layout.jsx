@@ -17,7 +17,7 @@ const Layout = ({ children }) => {
                 <link href='./icons/mac.png' rel='icon' type='image/png' sizes='16x16' />
                 <link href='./icons/mac.png' rel='icon' type='image/png' sizes='32x32' />
                 <link rel="apple-touch-icon" href="./icons/mac.png"></link>
-                <meta name="theme-color" content="#317EFB" />
+                <meta name="theme-color" content="#000000" />
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
                 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
